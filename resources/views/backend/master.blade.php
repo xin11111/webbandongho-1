@@ -47,7 +47,7 @@
             <li class="nav-item {{(request()->is('admin-page')) ? 'active' : '' }}">
                 <a class="nav-link" href="{{url('/admin-page')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Bảng điều khiển</span></a>
+                    <span>Tổng quan</span></a>
             </li>
             <!-- Nav Item - Pages Collapse danh mục -->
             <li class="nav-item {{(request()->is('admin-page/category*')) ? 'active' : '' }}">
@@ -57,7 +57,7 @@
                     <span>Danh mục sản phẩm</span>
                 </a>
                 <div id="category" class="collapse {{(request()->is('admin-page/category*')) ? 'show' : '' }}" aria-labelledby="category" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">              
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{(request()->is('admin-page/category/add')) ? 'active' : '' }}" href="{{url('admin-page/category/add')}}">Thêm danh mục</a>
                         <a class="collapse-item {{(request()->is('admin-page/category/list')) ? 'active' : '' }}" href="{{url('admin-page/category/list')}}">Danh sách danh mục</a>
                     </div>
@@ -72,7 +72,7 @@
                     <span>Sản phẩm</span>
                 </a>
                 <div id="product" class="collapse {{(request()->is('admin-page/product*')) ? 'show' : '' }}" aria-labelledby="product" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">              
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{(request()->is('admin-page/product/add')) ? 'active' : '' }}" href="{{url('admin-page/product/add')}}">Thêm sản phẩm</a>
                         <a class="collapse-item {{(request()->is('admin-page/product/list')) ? 'active' : '' }}" href="{{url('admin-page/product/list')}}">Danh sách sản phẩm</a>
                     </div>
@@ -86,7 +86,7 @@
                     <span>Slide</span>
                 </a>
                 <div id="slide" class="collapse {{(request()->is('admin-page/slide*')) ? 'show' : '' }}" aria-labelledby="slide" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">              
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{(request()->is('admin-page/slide/add')) ? 'active' : '' }}" href="{{url('admin-page/slide/add')}}">Thêm slide</a>
                         <a class="collapse-item {{(request()->is('admin-page/slide/list')) ? 'active' : '' }}" href="{{url('admin-page/slide/list')}}">Danh sách slide</a>
                     </div>
@@ -121,7 +121,7 @@
                     <span>Quản trị viên</span>
                 </a>
                 <div id="admin" class="collapse {{(request()->is('admin-page/admin*')) ? 'show' : '' }}" aria-labelledby="admin" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">              
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{(request()->is('admin-page/admin/add')) ? 'active' : '' }}" href="{{url('admin-page/admin/add')}}">Thêm quản trị viên</a>
                         <a class="collapse-item {{(request()->is('admin-page/admin/list')) ? 'active' : '' }}" href="{{url('admin-page/admin/list')}}">Danh sách quản trị viên</a>
                     </div>
@@ -150,9 +150,9 @@
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
-                    </button>         
+                    </button>
                     <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">                                                    
+                    <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -184,7 +184,7 @@
                         </div>
                     @endif
                 	@yield('content')
-                  
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -196,7 +196,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; DONG HO XUA 2020</span>
+                        <span>Copyright &copy; DONG HO XUA 2025</span>
                     </div>
                 </div>
             </footer>
@@ -270,9 +270,9 @@
                     "next": "Sau"
                 }
             },
-       
+
         });
-        
+
          /*slide*/
         $('.slide').change(function(){
             $('.slide-display').css('display','block');
@@ -285,7 +285,7 @@
                     $(this).remove();
                 });
             }, 3000);
-       
+
     });
 
     </script>

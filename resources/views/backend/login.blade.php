@@ -64,7 +64,12 @@
                                         </div>
                                         <input type="submit" name="" class="btn btn-primary btn-user btn-block" value="Đăng nhập">                           
                                     </form>
-        
+                                    @if($errors->has('stringUsername'))
+                                <div class="alert alert-danger alert-dismissible text-center mt-1">{{ $errors->first('stringUsername') }}<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                            @endif
                                 </div>
                             </div>
                         </div>

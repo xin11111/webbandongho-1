@@ -8,7 +8,7 @@
 					<p style="margin: 0 0 0;"><i class="fas fa-sort-up" style="transform: rotate(90deg);"></i><a href="{{url('/contact')}}" style="text-decoration: none;color: grey"> Liên hệ</a></p>
 					<p style="margin: 0 0 0;"><i class="fas fa-sort-up" style="transform: rotate(90deg);"></i><a href="{{url('/cart')}}" style="text-decoration: none;color: grey"> Giỏ hàng</a></p>
 				</div>
-				
+
 				<div class="col-md-4 col-sm-6">
 					<legend>Danh mục sản phẩm</legend>
 					<?php $categories = DB::table('category')->get(); ?>
@@ -30,5 +30,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="" style="background: black;"><div class="text-center">Designed by Truong Phuoc </div></div>
+		<div class="" style="background: black;"><div class="text-center">Tùng Dương</div></div>
 </div>

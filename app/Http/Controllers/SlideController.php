@@ -19,14 +19,14 @@ class SlideController extends Controller
             'slide' => 'mimes:jpeg,jpg,png'
         ],
         [
-            'slide' => 'Ảnh định dạng jpeg,jpg,png'
+            'mimes' => 'Không đúng định dạng ảnh : jpeg,jpg,png'
         ]);
         $slide = new Slide;
     	$slide->name = time().$request->file('slide')->getClientOriginalName();
     	$slide->save();
         /*move vào file*/
         $request->file('slide')->move('images/slide',$slide->name);
-    	return redirect(url('/admin-page/slide/list'))->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
+    	return back()->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
     }
     public function getEdit($id){
     	$slide = Slide::find($id);
@@ -37,7 +37,7 @@ class SlideController extends Controller
             'slide' => 'mimes:jpeg,jpg,png'
         ],
         [
-            'slide' => 'Ảnh định dạng jpeg,jpg,png'
+            'mimes' => 'Không đúng định dạng ảnh : jpeg,jpg,png'
         ]);
 		$slide = Slide::find($id);
         if(file_exists('images/slide/'.$slide->name)) unlink('images/slide/'.$slide->name);
@@ -46,7 +46,7 @@ class SlideController extends Controller
 		$slide->save();
         /*move vào file*/
         $request->file('slide')->move('images/slide',$slide->name);
-		return redirect(url('/admin-page/slide/list'))->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
+		return back()->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
     }
     public function getDelete($id){
         $slide = Slide::find($id);

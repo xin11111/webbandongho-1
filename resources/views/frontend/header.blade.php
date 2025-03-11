@@ -10,8 +10,7 @@
 			<div class="collapse navbar-collapse menu_header">
 				
 				<ul class="navbar-nav ml-auto">
-					<form class="form-inline" style="margin: auto;" method="post" action="{{url('/product/search')}}">
-						@csrf
+					<form class="form-inline" style="margin: auto;" method="get" action="{{url('/product')}}">
 						<div class="input-group" style="min-width: 280px">
 							<input class="form-control" type="search" name="key" placeholder="Nhập từ khóa tên sản phẩm" aria-label="Search" required>
 							<div class="input-group-append">
@@ -29,7 +28,7 @@
 				    	<a class="nav-link" href="{{url('/contact')}}"><i class="fas fa-phone-alt"></i> Liên hệ</a>
 				  	</li>
 				  	<li class="nav-item rounded dropdown">
-				    	<a class="nav-link dropdown-toggle" id="navbarDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-circle"></i> Tài khoản</a>
+				    	<a class="nav-link dropdown-toggle" id="navbarDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-circle"></i> {{(Auth::guard('account_customer')->check())?Auth::guard('account_customer')->user()->username:'Tài khoản'}}</a>
 				    	<div class="dropdown-menu" aria-labelledby="navbarDropdownLink">
 				    		@if(!(Auth::guard('account_customer')->check()))
 					        <a class="dropdown-item" href="{{url('/login')}}"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>

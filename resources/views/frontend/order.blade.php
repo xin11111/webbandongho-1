@@ -38,10 +38,10 @@
 		</div>
 		<div class="col-md-8">
 			<div class="border mb-4 ">
-			<h6 class="card-header bg-white"><i class="fas fa-map-marker-alt"></i> Địa chỉ nhận hàng</h6>
+			<h6 class="card-header bg-white"><i class="fas fa-map-marker-alt"></i> Địa chỉ giao hàng</h6>
 			<div class="card-body">
 				@if(count($listCustomerShippingAddress)==0)
-				<div>Bạn chưa có địa chỉ nhận hàng <a href="{{url('/customer/shipping-address/add')}}" class="btn btn-dark btn-sm">+ Thêm địa chỉ</a></div>
+				<div>Bạn chưa có địa chỉ giao hàng <a href="{{url('/customer/shipping-address/add')}}" class="btn btn-dark btn-sm">+ Thêm địa chỉ</a></div>
 				@else
 				<div class="row choice"> 
 					<div class="display-address col-md-9 mb-1 row"></div>

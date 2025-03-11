@@ -9,10 +9,10 @@
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="row mb-1">
-				<h6 class="col-sm-4"><i class="fas fa-phone-alt"></i> Điện thoại</h6><div class="col-sm-8"> 084.333.0889</div>
+				<h6 class="col-sm-4"><i class="fas fa-phone-alt"></i> Điện thoại</h6><div class="col-sm-8"> 0904185074</div>
 			</div>
 			<div class="row mb-1">
-				<h6 class="col-sm-4"><i class="fas fa-envelope"></i> Email</h6><div class="col-sm-8"> caophong8991@gmail.com</div>
+				<h6 class="col-sm-4"><i class="fas fa-envelope"></i> Email</h6><div class="col-sm-8"> buitungduong18102003@gmail.com</div>
 			</div>
 			<hr>
 			<div class="card mb-3">
@@ -21,7 +21,7 @@
 					<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdonghovandinh&tabs=timeline&width=350&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="350" height="350" style="border:none;overflow:hidden; width: 100%" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
 				</div>
 			</div>
-			
+
 		</div>
 		<div class="col-sm-7">
 			<div class="card">

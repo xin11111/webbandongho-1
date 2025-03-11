@@ -14,7 +14,7 @@
 			@include('frontend.cart.cartlist')
 			@if(session('cart'))
 			<div style="float: right;">
-					<a class="btn btn-secondary text-white" data-toggle="modal" data-target="#destroyCartModal"><i class="fas fa-trash-alt"></i> Xóa giỏ hàng</a>
+					<a class="btn btn-secondary text-white" data-toggle="modal" data-target="#destroyCartModal"><i class="fas fa-trash-alt"></i> Hủy giỏ hàng</a>
 					<a href="{{url('/order')}}" class="btn btn-success">Đặt hàng</a>
 			</div>
 			@endif
@@ -27,7 +27,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Bạn muốn xóa giỏ hàng?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Bạn muốn hủy giỏ hàng?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -35,7 +35,7 @@
                 <div class="modal-body">Chọn "Đồng ý" bên dưới để hủy giỏ hàng.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Thoát</button>
-                    <button class="btn btn-primary" data-dismiss="modal" onclick="destroyCartList()">Đồng ý</button>
+                    <a class="btn btn-primary" href="{{url('/destroyCartList')}}">Đồng ý</a>
                 </div>
             </div>
         </div>
@@ -44,15 +44,6 @@
 	function deleteCartList(id){
 		$.ajax({
 			url : 'deleteCartList/'+id,
-			type : 'get'
-		}).done(function(response){
-			$('.cartlist').empty();
-			$('.cartlist').html(response);
-		});
-	}
-	function destroyCartList(){
-		$.ajax({
-			url : 'destroyCartList',
 			type : 'get'
 		}).done(function(response){
 			$('.cartlist').empty();

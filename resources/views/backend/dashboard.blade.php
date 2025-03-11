@@ -1,6 +1,6 @@
 @extends('backend.master')
 @section('content')
-<h1 class="h3 mb-4 text-gray-800">Bảng điều khiển</h1>
+<h1 class="h3 mb-4 text-gray-800">Tổng quan</h1>
 <div class="row">
     <!--  Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">

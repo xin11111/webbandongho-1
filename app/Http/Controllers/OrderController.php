@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\CustomerShippingAddress;
@@ -10,7 +11,8 @@ use App\Models\Payment;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Review;
-use  Auth;
+use Illuminate\Support\Facades\Auth;
+
 class OrderController extends Controller
 {
     //frontend
@@ -21,7 +23,7 @@ class OrderController extends Controller
 		return view('frontend.order',['listCustomerShippingAddress'=>$listCustomerShippingAddress]);
 	}
 	public function postAdd(Request $request){
-		if(!$request->intShippingAddress) 
+		if(!$request->intShippingAddress)
 			return back()->with(['typeMsg'=>'danger','msg'=>'Bạn chưa có địa chỉ giao hàng']);
 		$customerShippingAddress = CustomerShippingAddress::find($request->intShippingAddress);
 		$shippingAddress = new ShippingAddress;
@@ -34,9 +36,9 @@ class OrderController extends Controller
 		$shippingAddress->save();
 		#payment
 		$payment = new Payment;
-		$payment->method = ($request->intPayment==0)?'COD':'Khác'; 
+		$payment->method = ($request->intPayment==0)?'COD':'Khác';
 		$payment->save();
-		#	
+		#
 		if(session('cart')){
 			$cart = session('cart');
 			$order = new Order;
@@ -58,7 +60,7 @@ class OrderController extends Controller
 				$orderItem->order_id = $order->id;
 				$orderItem->product_id = $item->getProduct()->id;
 				$orderItem->review_id = $review->id;
-				$orderItem->price_sell = $item->getPriceSell(); 
+				$orderItem->price_sell = $item->getPriceSell();
 				$orderItem->quantity = $item->getQuantity();
 				$orderItem->sub_total = $item->getSubTotal();
 				$orderItem->save();
@@ -66,14 +68,14 @@ class OrderController extends Controller
 			session()->forget('cart');
 		return redirect(url('/customer/order-history/detail/'.$order->id))->with(['typeMsg'=>'success','msg'=>'Đặt hàng thành công']);
 		}
-		
+
 	}
 	/*xem lịch sử đặt hàng*/
     public function getOrderHistory(){
     	$listOrder = Order::where('customer_id',Auth::guard('account_customer')->user()->person->customer->id)->get();
-    	return view('frontend.customer.order_history.list',['listOrder'=>$listOrder]); 
+    	return view('frontend.customer.order_history.list',['listOrder'=>$listOrder]);
     }
-    /*chỉ tiết đơn*/ 
+    /*chỉ tiết đơn*/
     public function getDetailOrder($id){
     	$order = Order::find($id);
     	return view('frontend.customer.order_history.detail',['order'=>$order]);
@@ -89,7 +91,7 @@ class OrderController extends Controller
 	/*back end*/
 	public function getList(){
 		$listOrder = Order::all();
-		return view('backend.order.list',['listOrder'=>$listOrder]); 
+		return view('backend.order.list',['listOrder'=>$listOrder]);
 	}
 	public function getDetail($id){
 		$order = Order::find($id);
@@ -108,7 +110,6 @@ class OrderController extends Controller
 		switch ($request->intStatus) {
 			case 0:
 				return back()->with(['typeMsg'=>'info','msg'=>'Đơn vốn chờ xử lý rồi']);
-				break;
 			case 1:
 				# code...
 				$order->status = 'Hủy';
@@ -130,13 +131,13 @@ class OrderController extends Controller
 				$payment = Payment::find($order->payment_id);
 				$payment->status = 'Đã thanh toán';
 				$payment->save();
-				break;	
+				break;
 			default:
 				# code...
 				break;
 		}
 		$order->save();
-		return view('backend.order.detail',['order'=>$order])->with(['typeMsg'=>'success','msg'=>'Cập nhật thành công']);
+		return back()->with(['typeMsg'=>'success','msg'=>'Cập nhật thành công']);
 	}
-	
+
 }

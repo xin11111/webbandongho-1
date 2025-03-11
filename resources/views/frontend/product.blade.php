@@ -15,7 +15,7 @@
 			<div class="page-header">
 			    	<h3>Sản phẩm
 			    		<?php
-			    			$key= request()->get('search');
+			    			$key= request()->get('key');
 				    		$id = request()->get('category');
 				    		if($id!=null) {
 				    		$db = DB::table('category')->where('id',$id)->first();
@@ -26,8 +26,13 @@
 			    	</h3> 
 			    	<hr>     
 			</div>
+			<div class="container">
+				<!-- lựa chọn nâng cao như giá, sắp tên -->
+				@include('frontend.advanced_options')
+			</div>
+			<hr>
 			<div class="mb-4">
-				<b>Hiển thị {{$listProduct->count()}} sản phẩm (tổng số {{$listProduct->total()}} sản phẩm) {{(isset($key))?('cho từ khóa : "'.$key.'"'):''}}</b>
+				<p>Hiển thị {{$listProduct->count()}} sản phẩm (tổng số {{$listProduct->total()}} sản phẩm) {{(isset($key))?('cho từ khóa : "'.$key.'"'):''}}</p>
 				
 			</div>
 			<div class="row">

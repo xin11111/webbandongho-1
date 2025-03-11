@@ -141,10 +141,10 @@ white-space: nowrap;
 		width: 0;
 		height: 0;
 }
-.mini-image [type=radio] + img{
+.mini-image input[type=radio] + img{
 	cursor: pointer;
 }
-.mini-image [type=radio]:checked + img{
+.mini-image input[type=radio]:checked + img{
 	outline: 1px double black;
 	opacity: 1;
 }
@@ -202,4 +202,20 @@ input[type='number']::-webkit-inner-spin-button {
 	opacity: 0;
 	width: 0;
 	height: 0;
+}
+/*lọc nâng cao*/
+.range-price input[type=radio]+span{
+	cursor: pointer;
+	padding-right: 5px;
+	background-color: #f5f5f5;
+}
+.range-price input[type=radio]{
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+.range-price input[type=radio]:checked + span{
+	color: blue;
+	font-weight: bold;
 }

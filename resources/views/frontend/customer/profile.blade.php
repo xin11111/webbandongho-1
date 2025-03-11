@@ -58,7 +58,7 @@
 						<label for="stringEmail" class="col-md-3 text-muted">Email</label>
 						<input class="col-md-5 form-control" id="stringEmail" type="email" name="stringEmail" placeholder="vd: lunglinh@mail.com" value="{{$account->person->email}}">
 					</div>
-					<input type="submit" name="" class="btn btn-success d-flex justify-content-center" value="Cập nhật" style="margin-left: 40%;width: 20%">
+					<input type="submit" name="" class="btn btn-success d-flex justify-content-center" value="Thực thi" style="margin-left: 40%;width: 20%">
 				</form>
 			</div>  			
 		</div>

@@ -71,13 +71,14 @@
 			$('#scroll-top').click(function(){
 				$(window).scrollTop(0);
 			});
-			window.setTimeout(function() {
-			    $(".alert").fadeOut(2000);
-			    $(".alert").setTimeout(function(){
-			    	$(this).remove();
-			    });
-			}, 3000);
-		});    
+            window.setTimeout(function() {
+    $(".alert").fadeOut(2000, function() {
+        setTimeout(function() {
+            $(".alert").remove();
+        }, 2000);
+    });
+}, 3000);
+
 
 		function addCartItem(id){
 			var quantity = 1;
@@ -87,7 +88,7 @@
 				type : 'GET'
 			}).done(function(response){
 				$(".add-cart"+id).empty();
-				$(".add-cart"+id).html("<i class='fas fa-check'></i> Đã thêm vào giỏ").attr({'class':'btn btn-success add-cart'+id,'href':'javascript:void(0);'});	
+				$(".add-cart"+id).html("<i class='fas fa-check'></i> Đã thêm vào giỏ").attr({'class':'btn btn-success add-cart'+id,'href':'javascript:void(0);'});
 				$('.mini-cart').empty();
 				$('.mini-cart').html(response);
 				$('.total-quantity').text($('.total-quantity-hidden').val());
@@ -99,7 +100,7 @@
 				type : 'GET'
 			}).done(function(response){
 				$(".add-cart"+id).empty();
-				$(".add-cart"+id).html("<i class='fas fa-cart-plus'></i> Thêm vào giỏ").attr({'class':'btn btn-danger add-cart'+id,'href':"javascript: addCartItem("+id+");"});	
+				$(".add-cart"+id).html("<i class='fas fa-cart-plus'></i> Thêm vào giỏ").attr({'class':'btn btn-danger add-cart'+id,'href':"javascript: addCartItem("+id+");"});
 				$('.mini-cart').empty();
 				$('.mini-cart').html(response);
 				$('.total-quantity').text(($('.total-quantity-hidden')[0]) ? $('.total-quantity-hidden').val():'');
@@ -112,7 +113,7 @@
 			}).done(function(response){
 				if ($('.quantity'+id).val()<=0) {
 					$(".add-cart"+id).empty();
-					$(".add-cart"+id).html("<i class='fas fa-cart-plus'></i> Thêm vào giỏ").attr({'class':'btn btn-danger add-cart'+id,'href':"javascript: addCartItem("+id+");"});	
+					$(".add-cart"+id).html("<i class='fas fa-cart-plus'></i> Thêm vào giỏ").attr({'class':'btn btn-danger add-cart'+id,'href':"javascript: addCartItem("+id+");"});
 				}
 				$('.mini-cart').empty();
 				$('.mini-cart').html(response);
@@ -125,10 +126,12 @@
 		value = value.replace(/[^0-9]/img,"");
 		$('.quantity'+id).val(value);
 		var max =parseInt($('.quantity'+id).attr('max'));
-		if(value>max) $('.quantity'+id).val(max);	
+		if(value>max) $('.quantity'+id).val(max);
 		}
-		
-		
+
+
 	</script>
 </body>
 </html>
+
+

@@ -17,10 +17,10 @@ class CartController extends Controller
     	$product = Product::find($id);
     	$priceSell = ($product->promotion_price != 0)? $product->promotion_price : $product->price;
     	/*cart item*/
-    	$cartItem = new CartItem($product,$priceSell,$quantityAdd,0);	
+    	$cartItem = new CartItem($product,$priceSell,$quantityAdd,0);
     	$listCartItem = $cart->getListCartItem();
     	if($listCartItem!=null && array_key_exists($id, $listCartItem)) $cartItem = $listCartItem[$id];
-    	
+
     	$quantity = $cartItem->getQuantity();
     	$subTotal = $priceSell * $quantity;
     	$cartItem->setQuantity($quantity);
@@ -34,8 +34,8 @@ class CartController extends Controller
     	$cart->setListCartItem($listCartItem);
     	$cart->setTotalQuantity($totalQuantity);
     	$cart->setGrandTotal($grandTotal);
-    	
-    	session()->put('cart',$cart); 	
+
+    	session()->put('cart',$cart);
     	return view('frontend.cart.minicart');
     }
 
@@ -50,7 +50,7 @@ class CartController extends Controller
             session()->put('cart',$cart);
         } else {
             session()->forget('cart');
-        }    
+        }
         return view('frontend.cart.minicart');
     }
 
@@ -74,7 +74,7 @@ class CartController extends Controller
             session()->put('cart',$cart);
         } else {
             session()->forget('cart');
-        }    
+        }
         return view('frontend.cart.minicart');
     }
     public function getCartList(){
@@ -82,7 +82,7 @@ class CartController extends Controller
     }
     public function destroyCartList(){
         session()->forget('cart');
-        return view('frontend.cart.cartlist');
+        return view('frontend.cart.cart');
     }
     public function updateCartList($id,$quantity){
         $cart = session('cart');
@@ -104,7 +104,7 @@ class CartController extends Controller
             session()->put('cart',$cart);
         } else {
             session()->forget('cart');
-        }    
+        }
         return view('frontend.cart.cartlist');
     }
     public function deleteCartList($id){
@@ -118,7 +118,7 @@ class CartController extends Controller
             session()->put('cart',$cart);
         } else {
             session()->forget('cart');
-        }    
+        }
         return view('frontend.cart.cartlist');
     }
 

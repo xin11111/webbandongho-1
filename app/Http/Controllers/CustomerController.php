@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Person;
 use App\Models\Account;
-use Auth;
-use Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class CustomerController extends Controller
 {
 	//frontend
@@ -24,19 +24,18 @@ class CustomerController extends Controller
         	'min' => 'Trường trên tối thiểu :min ký tự',
             'max' => 'Trường trên tối đa :max ký tự',
  			'different' => 'Mật khẩu mới phải khác mật khẩu cũ',
-            'same' => 'Mật khẩu xác nhận không khớp mật khẩu mới',  
+            'same' => 'Mật khẩu xác nhận không khớp mật khẩu mới',
         ]);
         $account = Account::findOrFail(Auth::guard('account_customer')->id());
         $oldPassword = $request->stringOldPassword;
         $password = $request->stringPassword;
         $rePassword = $request->stringRePassword;
-        if(Hash::check($oldPassword,$account->password)){            
+        if(Hash::check($oldPassword,$account->password)){
             $account->password= Hash::make($password);
-            $account->save();                          
+            $account->save();
         }
         else return back()->with(['typeMsg'=>'danger','msg'=>'Mật khẩu cũ không đúng']);
-        Auth::guard('account_customer')->logout();
-        return back()->with(['typeMsg'=>'success','msg'=>'Đăng xuất thành công']);
+        return back()->with(['typeMsg'=>'success','msg'=>'Đổi mật khẩu thành công']);
     }
     /*thong tiin ca nhan*/
 	public function getProfile(){
@@ -44,12 +43,12 @@ class CustomerController extends Controller
 	}
 	public function postProfile(Request $request){
 		$request->validate([
-           
+
             'stringPhone' => 'digits:10'
         ],
         [
             'digits' => 'Trường gồm :digits số',
-           
+
         ]);
 		$person = Person::where('account_id',Auth::guard('account_customer')->id())->first();
 		$person->full_name = $request->stringFullName;
@@ -62,7 +61,7 @@ class CustomerController extends Controller
 		return back()->with(['typeMsg'=>'success','msg'=>'Cập nhật thành công']);
 	}
 	public function getSignup(){
-		if(Auth::guard('account_customer')->check()) 
+		if(Auth::guard('account_customer')->check())
 			return back()->with(['typeMsg'=>'danger','msg'=>'Bạn phải đăng xuất để sử dụng tính năng này']);;
 		return view('frontend.signup');
 	}
@@ -71,7 +70,7 @@ class CustomerController extends Controller
             'stringUsername' => 'unique:account,username|min:5|max:15',
             'stringPassword' => 'min:5|max:15',
             'stringRePassword' => 'same:stringPassword',
-          
+
             'stringPhone' => 'digits:10'
         ],
         [
@@ -80,7 +79,7 @@ class CustomerController extends Controller
             'max' => 'Trường trên tối đa :max ký tự',
             'digits' => 'Trường gồm :digits số',
             'same' => 'Mật khẩu xác nhận không khớp mật khẩu mới',
-           
+
         ]);
 		# add account
 		$account = new Account;
@@ -103,11 +102,11 @@ class CustomerController extends Controller
 		$customer = new Customer;
 		$customer->person_id = $person->id;
 		$customer->save();
-		return redirect(url('/login'))->with(['typeMsg'=>'info','msg'=>'Đã đăng ký thành công mời bạn đăng nhập']);
+		return back()->with(['typeMsg'=>'info','msg'=>'Đã đăng ký thành công mời bạn đăng nhập']);
 	}
     //backend
     public function getList(){
-    	$listCustomer = Customer::all();    	
+    	$listCustomer = Customer::all();
     	return view('backend.customer.list',['listCustomer'=>$listCustomer]);
     }
     public function getDetail($id){
@@ -135,7 +134,9 @@ class CustomerController extends Controller
 		return back()->with(['typeMsg'=>'success','msg'=>'Cập nhật thành công']);
     }
     public function getDelete($id){
-    	Customer::destroy($id);
+    	//Customer::destroy($id);
+    	$account = Customer::find($id)->person->account;
+    	Account::destroy($account->id);
     	return back()->with(['typeMsg'=>'success','msg'=>'Xóa thành công']);
     }
 }

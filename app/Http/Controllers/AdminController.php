@@ -25,10 +25,10 @@ class AdminController extends Controller
             'stringRePassword' => 'same:stringPassword',
            
             'stringPhone' => 'digits:10',
-            'intIdentity' => 'digits:12'
+            'intIdentity' => 'digits:12|unique:account,identity'
         ],
         [
-            'unique' => 'Tên tài khoản đã tồn tại',
+            'unique' => 'Trường trên đã tồn tại',
             'min' => 'Trường trên tối thiểu :min ký tự',
             'max' => 'Trường trên tối đa :max ký tự',
             'digits' => 'Trường gồm :digits số',
@@ -57,7 +57,7 @@ class AdminController extends Controller
         $admin->person_id= $person->id;
     	$admin->identity = $request->intIdentity;
     	$admin->save();
-    	return redirect(url('/admin-page/admin/list'))->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
+    	return back()->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
     }
     public function getEdit($id){
     	$admin = Admin::find($id);
@@ -113,10 +113,12 @@ class AdminController extends Controller
             }
             
         }
-        return redirect(url('/admin-page/admin/list'))->with(['typeMsg'=>'success','msg'=>'Cập nhật thành công']);     
+        return back()->with(['typeMsg'=>'success','msg'=>'Cập nhật thành công']);     
     }
     public function getDelete($id){
-    	Admin::destroy($id);
+    	//Admin::destroy($id);
+        $account = Admin::find($id)->person->account;
+        Account::destroy($account->id);
     	return redirect(url('/admin-page/admin/list'))->with(['typeMsg'=>'success','msg'=>'Xóa thành công']);
     }
 }

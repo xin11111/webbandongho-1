@@ -13,7 +13,6 @@ class CustomerShippingAddressController extends Controller
    		return view('frontend.customer.shipping_address.list',['listCustomerShippingAddress'=>$listCustomerShippingAddress]);
     }
     public function getAdd(){
-        session()->put('urlprev',request()->server('HTTP_REFERER'));
     	return view('frontend.customer.shipping_address.add_edit');
     }
     public function postAdd(Request $request){
@@ -33,7 +32,7 @@ class CustomerShippingAddressController extends Controller
         /*cập nhật các bản ghi khác default về 0*/
         if($request->boolDefault==true) 
         CustomerShippingAddress::where([['id','<>',$customerShippingAddress->id],['customer_id',$customerShippingAddress->customer_id]])->update(['default'=>0]);
-		return redirect(session('urlprev'))->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
+		return back()->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
     }
     public function getEdit($id){
     	$customerShippingAddress = CustomerShippingAddress::find($id);
@@ -56,7 +55,7 @@ class CustomerShippingAddressController extends Controller
          /*cập nhật các bản ghi khác default về 0*/
         if($request->boolDefault==true) 
         CustomerShippingAddress::where([['id','<>',$customerShippingAddress->id],['customer_id',$customerShippingAddress->customer_id]])->update(['default'=>0]);
-		return redirect(url('/customer/shipping-address/list'))->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
+		return back()->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
     }
     public function getDelete($id){
         if(CustomerShippingAddress::find($id)->default==1 && count(CustomerShippingAddress::all())!=1) {

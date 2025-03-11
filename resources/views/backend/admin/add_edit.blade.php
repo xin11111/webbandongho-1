@@ -47,7 +47,7 @@
 		<hr>
 		<div class="row mb-3">
 			<div class="col-md-3"><b>Căn cước</b></div>
-			<div class="col-md-9"><input class="form-control" id="intIdentity" type="text" name="intIdentity" placeholder="vd: 001098014016" value="{{(isset($admin))?$admin->identity:''}}" required></div>
+			<div class="col-md-9"><input class="form-control" id="intIdentity" type="text" name="intIdentity" placeholder="vd: 001098014016" value="{{(isset($admin))?$admin->identity:''}}" {{(isset($admin))?'readonly':''}} required></div>
 		</div>	
 		@if($errors->has('intIdentity'))
 								<div class="alert alert-danger alert-dismissible text-center mt-1">{{ $errors->first('intIdentity') }}<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -56,7 +56,7 @@
 								</div>
 							@endif
 		<div class="row mb-3">
-			<div class="col-md-3"><b>Họ và tên</b></div>
+			<div class="col-md-3"><b>Họ tên</b></div>
 			<div class="col-md-9"><input class="form-control" id="stringFullName" type="text" name="stringFullName" placeholder="vd: Lung Thị Linh" value="{{(isset($admin))?$admin->person->full_name:''}}" required></div>
 		</div>
 		@if($errors->has('stringFullName'))
@@ -66,7 +66,7 @@
 								</div>
 							@endif
 		<div class="row mb-2">
-				<div class="col-sm-3"><b>Trạng thái</b></div>
+				<div class="col-sm-3"><b>Giới tính</b></div>
 				<div class="col-sm-9">
 					<input type="radio" name="intGender" value="1" checked>
 					<label>Nam</label><br>

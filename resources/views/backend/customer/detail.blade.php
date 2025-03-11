@@ -11,32 +11,32 @@
 		</div>
 		<div class="row mb-3">
 			<div class="col-md-3"><b>Họ và tên</b></div>
-			<div class="col-md-9"><input class="form-control" id="stringFullName" type="text" name="stringFullName" placeholder="vd: Lung Thị Linh" value="{{(isset($customer))?$customer->person->full_name:''}}"></div>
+			<div class="col-md-9"><input readonly class="form-control" id="stringFullName" type="text" name="stringFullName" placeholder="vd: Lung Thị Linh" value="{{(isset($customer))?$customer->person->full_name:''}}"></div>
 		</div>
 		<div class="row mb-2">
 				<div class="col-sm-3"><b>Trạng thái</b></div>
 				<div class="col-sm-9">
-					<input type="radio" name="intGender" value="1" checked>
+					<input type="radio" name="intGender" value="1" disabled checked>
 					<label>Nam</label><br>
-					<input type="radio" name="intGender" value="0" {{(isset($customer)&&$customer->person->gender=='Nữ')?'checked':''}}>
+					<input type="radio" name="intGender" value="0" disabled {{(isset($customer)&&$customer->person->gender=='Nữ')?'checked':''}}>
 					<label>Nữ</label><br>
 				</div>
 		</div>
 		<div class="row mb-3">
 			<div class="col-md-3"><b>Địa chỉ</b></div>
-			<div class="col-md-9"><input class="form-control" id="stringAddress" type="text" name="stringAddress" placeholder="vd: Hà Nam" value="{{(isset($customer))?$customer->person->address:''}}"></div>
+			<div class="col-md-9"><input readonly class="form-control" id="stringAddress" type="text" name="stringAddress" placeholder="vd: Hà Nam" value="{{(isset($customer))?$customer->person->address:''}}"></div>
 		</div>
 		<div class="row mb-3">
 			<div class="col-md-3"><b>Ngày sinh</b></div>
-			<div class="col-sm-9"><input class="form-control" id="dateOfBirth" type="date" name="dateOfBirth" min="1920-01-01" max="2010-12-31" value="{{(isset($customer))?$customer->person->date_of_birth:''}}"></div>
+			<div class="col-sm-9"><input readonly class="form-control" id="dateOfBirth" type="date" name="dateOfBirth" min="1920-01-01" max="2010-12-31" value="{{(isset($customer))?$customer->person->date_of_birth:''}}"></div>
 		</div>
 		<div class="row mb-3">
 			<div class="col-md-3"><b>Số điện thoại</b></div>
-			<div class="col-md-9"><input class="form-control" pattern="[0-9]{10}" id="stringPhone" type="tel" name="stringPhone" placeholder="vd: 0843330889" required value="{{(isset($customer))?$customer->person->phone:''}}"></div>
+			<div class="col-md-9"><input readonly class="form-control" pattern="[0-9]{10}" id="stringPhone" type="tel" name="stringPhone" placeholder="vd: 0843330889" required value="{{(isset($customer))?$customer->person->phone:''}}"></div>
 		</div>
 		<div class="row mb-3">
 			<div class="col-md-3"><b>Email</b></div>
-			<div class="col-md-9"><input class="form-control" id="stringEmail" type="email" name="stringEmail" placeholder="vd: lunglinh@mail.com" value="{{(isset($customer))?$customer->person->email:''}}"></div>
+			<div class="col-md-9"><input readonly class="form-control" id="stringEmail" type="email" name="stringEmail" placeholder="vd: lunglinh@mail.com" value="{{(isset($customer))?$customer->person->email:''}}"></div>
 		</div>
 	<form method="post">
 		@csrf

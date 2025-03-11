@@ -40,9 +40,8 @@
 							 	</button>
 								</div>
 							@endif
-					<input type="submit" name="" class="btn btn-success d-flex justify-content-center" value="Cập nhật" style="margin-left: 40%;width: 20%">
+					<input type="submit" name="" class="btn btn-success d-flex justify-content-center" value="Thực thi" style="margin-left: 40%;width: 20%">
 				</form>
-				<p class="text-center"><small class="text-muted">Hệ thống sẽ đăng xuất tài khoản của bạn nếu thay đổi thành công</small></p>
 			</div>  			
 		</div>
 	</div>

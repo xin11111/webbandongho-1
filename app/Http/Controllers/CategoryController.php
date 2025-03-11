@@ -25,7 +25,7 @@ class CategoryController extends Controller
     	$category = new Category();//viết là new Category cũng được
     	$category->name = $request->stringName;
     	$category->save();
-    	return redirect(url('/admin-page/category/list'))->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
+    	return back()->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
       
     }
     public function getEdit($id){
@@ -43,7 +43,7 @@ class CategoryController extends Controller
 		$category = Category::find($id);
 		$category->name =$request->stringName;
 		$category->save();
-		return redirect(url('/admin-page/category/list'))->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
+		return back()->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
     }
     public function getDelete($id){
     	Category::destroy($id);

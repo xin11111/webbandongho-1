@@ -7,22 +7,53 @@ use App\Models\OrderItem;
 use App\Models\Image;
 use App\Models\Review;
 use Illuminate\Http\Request;
-
+use DB;
 class ProductController extends Controller
 {
     //frontend
-    public function getListProduct(){
-        $category_id = request()->get('category');
-        if($category_id!=null){
-            $listProduct = Product::where('category_id',$category_id)->where('enabled',1)->paginate(9);
-        }
-        else{
-            $key = request()->get('search');   
-            if($key!=null){
-                $listProduct = Product::where('name','like','%'.$key.'%')->where('enabled',1)->paginate(9);
+    public function getListProduct(Request $request){
+        $query = Product::select('*',DB::raw('IF(promotion_price>0,promotion_price,price) as price_sell'));
+        if($request->has('category')) $query->where('category_id',$request->category);
+        if($request->has('key')) $query->where('name','like','%'.$request->key.'%');
+        //sap xep
+        if($request->has('sort')){
+            switch ($request->sort) {
+                case 1://a-z
+                    $query->orderBy('name','asc');
+                    break;
+                case 2://z-a
+                    $query->orderBy('name','desc');
+                    break;
+                case 3:
+                    $query->orderBy('price_sell','asc');
+                    break;
+                case 4:
+                    $query->orderBy('price_sell','desc');
+                    break;
             }
-            else $listProduct = Product::where('enabled',1)->paginate(9);
+        } 
+        //khoảng giá
+        if($request->has('rangePrice')){
+            switch ($request->rangePrice) {
+                case 1:
+                    $query->having('price_sell','<',5000000);
+                    break;
+                case 2:
+                    $query->having('price_sell','>=',5000000)->having('price_sell','<',10000000);
+                    break;
+                case 3:
+                    $query->having('price_sell','>=',10000000)->having('price_sell','<',15000000);
+                    break;
+                case 4:
+                    $query->having('price_sell','>=',15000000)->having('price_sell','<',20000000);
+                    break;
+                case 5:
+                    $query->having('price_sell','>=',20000000);
+                    break;
+            }
         }
+
+        $listProduct = $query->where('enabled',1)->paginate(9);
         return view('frontend.product',['listProduct'=>$listProduct]);
     }
     public function getDetailProduct($id){
@@ -34,10 +65,10 @@ class ProductController extends Controller
         $product_detail->save();
         return view('frontend.product_detail',['product_detail'=>$product_detail,'listReview'=>$listReview]);
     }
-    public function postSearchProduct(Request $request){
+    /*public function postSearchProduct(Request $request){
         $key = $request->key;    
         return redirect(url('/product?search='.$key));
-    }
+    }*/
     //backend
     public function getList(){
     	$listProduct = Product::all(); 
@@ -84,7 +115,7 @@ class ProductController extends Controller
     		$dbImage->product_id = $product->id;
     		$dbImage->save();
     	}
-    	return redirect(url('/admin-page/product/list'))->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
+    	return back()->with(['typeMsg'=>'success','msg'=>'Thêm thành công']);
     }
     public function getEdit($id){
         $listCategory = Category::all();
@@ -137,10 +168,10 @@ class ProductController extends Controller
                 $dbImage->save();
             }
         }
-        return redirect(url('/admin-page/product/list'))->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
+        return back()->with(['typeMsg'=>'success','msg'=>'Sửa thành công']);
     }
     public function getDelete($id){
-        $oldImage = Image::where('product_id',$id)->get();
+        $oldImages = Image::where('product_id',$id)->get();
         foreach ($oldImages as $oldImage ) {
             if(file_exists('images/product/'.$oldImage->name)) 
                 unlink('images/product/'.$oldImage->name);
